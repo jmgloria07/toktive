@@ -5,5 +5,5 @@ import java.util.Set;
 import io.github.jmgloria07.toktive.model.SocialMessage;
 
 public interface SocialDelegate {
-	public String shareToAllNetworks(SocialMessage message, Set<String> networks);
+	public void shareToAllNetworks(Set<SocialMessage> socialMessages);
 }

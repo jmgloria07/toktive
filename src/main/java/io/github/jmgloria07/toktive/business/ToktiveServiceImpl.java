@@ -1,16 +1,37 @@
 package io.github.jmgloria07.toktive.business;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-@Component
+import io.github.jmgloria07.toktive.business.delegate.SocialDelegate;
+import io.github.jmgloria07.toktive.model.SocialMessage;
+import io.github.jmgloria07.toktive.model.SocialNetwork;
+
+@Service
 public class ToktiveServiceImpl implements ToktiveService {
 	
+	@Autowired
+	final SocialDelegate socialDelegate;
+	
+	public ToktiveServiceImpl(SocialDelegate socialDelegate) {
+		this.socialDelegate = socialDelegate;
+	}
+	
 	@Override
-	public String share(String message, Set<String> networks) {
-		// TODO Auto-generated method stub
-		return "TokativeServiceImpl";
+	public void share(String message, Set<String> networks) {
+
+		Set<SocialMessage> socialMessages = networks.stream()
+		.map(network -> {
+			SocialMessage socialMessage = new SocialMessage();
+			socialMessage.setMessage(message);
+			socialMessage.setSocialNetwork(SocialNetwork.valueOf(network));
+			return socialMessage;
+		}).collect(Collectors.toSet());
+		
+		socialDelegate.shareToAllNetworks(socialMessages);
 	}
 
 }

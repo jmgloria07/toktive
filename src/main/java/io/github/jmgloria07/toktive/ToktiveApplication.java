@@ -1,5 +1,8 @@
 package io.github.jmgloria07.toktive;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -12,9 +15,11 @@ public class ToktiveApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext appContext = SpringApplication.run(ToktiveApplication.class, args);
+		
+		//if (startInConsole)
 		ToktiveService service = appContext.getBean(ToktiveServiceImpl.class);
 		
-		System.out.println(service.share(null, null));
+		service.share("test share post", new HashSet<>(Arrays.asList("TW","FB")));
 	}
 
 }
