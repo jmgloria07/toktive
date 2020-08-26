@@ -1,5 +1,4 @@
 # Toktive
-------------
 
 ## About
 Toktive (name not final, suggestions are appreciated) is an API that allows a client/consumer to share their post to all networks in a single action. For now the plan is to make FB and Twitter share work utilizing other third-party APIs for each network.
