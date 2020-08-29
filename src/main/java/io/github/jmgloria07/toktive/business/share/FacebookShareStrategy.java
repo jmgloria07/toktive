@@ -9,10 +9,9 @@ import io.github.jmgloria07.toktive.model.SocialNetwork;
 public class FacebookShareStrategy implements ShareStrategy {
 
 	@Override
-	public String share(SocialMessage message) {
+	public void share(SocialMessage message) {
 		// TODO Auto-generated method stub
 		System.out.println("sharing via FB: " + message.getMessage());
-		return null;
 	}
 
 	@Override
