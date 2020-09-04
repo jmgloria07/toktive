@@ -1,13 +1,15 @@
 package io.github.jmgloria07.toktive;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import java.util.Arrays;
+import java.util.HashSet;
 
-@SpringBootApplication
 public class ToktiveApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ToktiveApplication.class, args);
+		Toktive.getInstance()
+			.share("\"Mr. Watson come over here.\"", 
+					new HashSet<>(Arrays.asList("TW", "FB")));
+		Toktive.close();
 	}
 
 }
