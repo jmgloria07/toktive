@@ -6,9 +6,9 @@ Toktive (name not final, suggestions are appreciated) is an API that allows a cl
 ## Motivation
 Ever thought of a post, but ran into the hassle of opening Twitter, Facebook, Instagram, etc. and share it to each and everyone of them? This is the problem every social media/community manager faces everyday.
 
-There are actual applications existing that does more than this (\*ehem\* HootSuite \*ehem\*). But most of these applications are a full dinner course and a show, while all you need is the cupcake. This one is more of an ala-carte solution.
+There are applications that already exist and even do more than just posting (\*ehem\* HootSuite \*ehem\*). But most of these applications are a full dinner course and a show, while all you need is the cupcake. This one is more of an ala-carte solution.
 
-All that said, I'm not that heavy of a poster that needs to do all those things. I might not even think of wasting phone memory to install this app. **The main goal of this project is actually to** let me practice what I'm learning about Spring/Boot, Design Patterns, JPA, etc. I feel like I'm lagging behind on my hands-on project experiences. YouTube, Udemy, and other references online are not enough-- everyone knows that. We need to get our hands dirty, make mistakes, and experience firsthand how to work with them.
+All that said, I'm not that heavy of a poster that needs to do all those things. I might not even think of using up phone memory to install an app of this (coming soooon...?). **The main goal of this project is actually to** let me practice what I'm learning about Spring/Boot, Design Patterns, JPA, etc. I feel like I'm lagging behind on my hands-on project experiences. YouTube, Udemy, and other references online are not enough-- everyone knows that. We need to get our hands dirty, make mistakes, and experience firsthand how to work with them.
 
 ## Setup
 I made this application in Eclipse 2020-06 (4.16.0), with full support for Java EE. Initial Spring classes and Maven config files are generated via Spring Initializr.
@@ -18,9 +18,12 @@ To set this up in Eclipse, all you need to do is simply:
 2. Setup config files under src/main/resource folder. Remove the SAMPLE prepend on the file name and put your respective dev token values.
     - Setup your own Twitter dev tokens via https://developer.twitter.com/ if you don't have one yet.
     - Setup your own Facebook access token via https://developers.facebook.com/ 
-3. Run an mvn install and update the project
+3. Run an mvn install and update the project. 
+4. You may run the application through the main class `io.github.jmgloria07.toktive.ToktiveApplication` to do functional tests. 
 
-While this is created using Eclipse, it's not necessary to stick with it. While not required, it helps to start having the project build with Maven and allow Git to be used. Please look up for the equivalent steps for your preferred IDE.
+While this is created using Eclipse, it's not required build this project. 
+
+You may even use notepad and manually create the jar if you wish. Please look up for the equivalent steps for your preferred method/IDE.
 
 ## Usage
 Use `io.github.jmgloria07.toktive.Toktive` and create a singleton instance. Then call the `share` method with the supplied parameters `message` and `networks`. See sample usage at `io.github.jmgloria07.toktive.ToktiveApplication`
