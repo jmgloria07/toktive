@@ -17,11 +17,12 @@ public class TwitterShareStrategy implements ShareStrategy {
 	
 	@Override
 	public void share(SocialMessage message) {
+		//TODO: create proper logging
+		System.out.println("sharing via Twitter: " + message);
 		Twitter twitter = auth.getTwitterInstance();
 		try {
 			twitter.updateStatus(message.getMessage());
 		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

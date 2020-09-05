@@ -6,10 +6,11 @@ import java.util.HashSet;
 public class ToktiveApplication {
 
 	public static void main(String[] args) {
-		Toktive.getInstance()
+		Toktive toktive = Toktive.getInstance();
+		toktive
 			.share("\"Mr. Watson come over here.\"", 
-					new HashSet<>(Arrays.asList("TW", "FB")));
-		Toktive.close();
+					new HashSet<>(Arrays.asList("TW")));
+		toktive.close();
 	}
 
 }
