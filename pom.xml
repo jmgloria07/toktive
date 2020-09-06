@@ -15,7 +15,7 @@
 	</properties>
 
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-context</artifactId>
@@ -35,12 +35,14 @@
 		    <version>3.5.10</version>
 		    <scope>test</scope>
 		</dependency>		
+		
 		<!-- access twitter api -->
 		<dependency>
 			<groupId>org.twitter4j</groupId>
 			<artifactId>twitter4j-core</artifactId>
 			<version>4.0.6</version>
 		</dependency>		
+		
 		<!-- access facebook api -->
 		<dependency>
 		    <groupId>com.restfb</groupId>
