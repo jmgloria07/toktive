@@ -29,14 +29,15 @@ You may even use notepad and manually create the jar if you wish. Please look up
 Use `io.github.jmgloria07.toktive.Toktive` and create a singleton instance. Then call the `share` method with the supplied parameters `message` and `networks`. See sample usage at `io.github.jmgloria07.toktive.ToktiveApplication`
 
 ## Future plans
-- Handle errors with exceptions. Support try-catch resources at the Toktive class.
-- Create better API request-response object. Also create a single entry point interface.
+- Handle errors with exceptions.
 - ~~Lookup for any API that would let the app post to FB~~ FB doesn't anymore allow sharing via APIs, as permissions have been removed. With this, the client has to open an external browser. See https://developers.facebook.com/docs/graph-api/changelog/breaking-changes#login-4-24 
 - Posting to your Facebook Page may be possible though, will be implementing that shortly.
+- Proper logging
+- -----------release 1.0------------------
+- ~~Currently utilizes property files to work with access tokens, but planning to extend this further to use a DB (H2, perhaps?).~~ I wonder what's the best practice here? I think it's better to have a separate service to login instead. Consumer key and secret can be saved via property but access tokens aren't supposed to be. I should let the client application do the DB.
 - Support other SNS platforms (LinkedIn? IG? Stories? Tik...Tok?). 
     - I was supposed to use Spring Social for this, but found out that API has already been deprecated.
 - Support images..?
-- ~~Currently utilizes property files to work with access tokens, but planning to extend this further to use a DB (H2, perhaps?).~~ I wonder what's the best practice here? I think it's better to have a separate service to login instead. Consumer key and secret can be saved via property but access tokens aren't supposed to be. I should let the client application do the DB.
 - Make a separate web project that uses this API, could be Angular/React this time.
 - Remove the API dependencies per SNS and manually create a simple implementation 
 - The API is highly extensible, so a smartphone app can use this.
