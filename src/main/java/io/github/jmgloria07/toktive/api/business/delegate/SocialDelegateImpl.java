@@ -1,6 +1,8 @@
 package io.github.jmgloria07.toktive.api.business.delegate;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,6 +10,8 @@ import org.springframework.stereotype.Component;
 import io.github.jmgloria07.toktive.api.business.share.ShareStrategy;
 import io.github.jmgloria07.toktive.api.business.share.ShareStrategyContext;
 import io.github.jmgloria07.toktive.api.objects.SocialMessage;
+import io.github.jmgloria07.toktive.api.objects.SocialStatus;
+import io.github.jmgloria07.toktive.api.objects.ToktiveResponse;
 
 @Component
 public class SocialDelegateImpl implements SocialDelegate {
@@ -20,14 +24,26 @@ public class SocialDelegateImpl implements SocialDelegate {
 	}
 	
 	@Override
-	public void shareToAllNetworks(Set<SocialMessage> socialMessages) {
+	public List<ToktiveResponse> shareToAllNetworks(Set<SocialMessage> socialMessages) {
 		
-		socialMessages.stream()
-			.forEach(socialMessage -> {
+		//do each strategy
+		Set<SocialStatus> socialStatuses = socialMessages.stream()
+			.map(socialMessage -> {
 				ShareStrategy strategy = shareStrategyContext.getStrategy(socialMessage.getSocialNetwork());
-				strategy.share(socialMessage);
-			});
+				return strategy.share(socialMessage);
+			}).collect(Collectors.toSet());
 		
+		//create list of response objects
+		List<ToktiveResponse> response = socialStatuses.parallelStream()
+				.map(socialStatus -> {
+			ToktiveResponse result = new ToktiveResponse();
+			result.setId(socialStatus.getLink());
+			result.setUrl(socialStatus.getLink());
+			result.setStatus(socialStatus.getStatus().toString());
+			return result;
+		}).collect(Collectors.toList());
+		
+		return response;
 	}
 
 }

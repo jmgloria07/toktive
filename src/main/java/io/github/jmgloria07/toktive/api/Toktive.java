@@ -1,12 +1,14 @@
 package io.github.jmgloria07.toktive.api;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import io.github.jmgloria07.toktive.api.business.ToktiveService;
 import io.github.jmgloria07.toktive.api.config.ToktiveConfig;
+import io.github.jmgloria07.toktive.api.objects.ToktiveResponse;
 
 public class Toktive implements AutoCloseable, Serializable {
 
@@ -59,8 +61,8 @@ public class Toktive implements AutoCloseable, Serializable {
 	}
 	
 	//functional methods
-	public void share(String message, Set<String> networks) {
-		toktiveService.share(message, networks);
+	public List<ToktiveResponse> share(String message, Set<String> networks) {
+		return toktiveService.share(message, networks);
 	}
 	
 }

@@ -1,5 +1,6 @@
 package io.github.jmgloria07.toktive.api.business;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import io.github.jmgloria07.toktive.api.business.delegate.SocialDelegate;
 import io.github.jmgloria07.toktive.api.objects.SocialMessage;
 import io.github.jmgloria07.toktive.api.objects.SocialNetwork;
+import io.github.jmgloria07.toktive.api.objects.ToktiveResponse;
 
 @Service
 public class ToktiveServiceImpl implements ToktiveService {
@@ -21,7 +23,7 @@ public class ToktiveServiceImpl implements ToktiveService {
 	}
 	
 	@Override
-	public void share(String message, Set<String> networks) {
+	public List<ToktiveResponse> share(String message, Set<String> networks) {
 
 		Set<SocialMessage> socialMessages = networks.stream()
 		.map(network -> {
@@ -31,7 +33,7 @@ public class ToktiveServiceImpl implements ToktiveService {
 			return socialMessage;
 		}).collect(Collectors.toSet());
 		
-		socialDelegate.shareToAllNetworks(socialMessages);
+		return socialDelegate.shareToAllNetworks(socialMessages);
 	}
 
 }
