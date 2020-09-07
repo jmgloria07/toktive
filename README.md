@@ -1,7 +1,9 @@
 # Toktive
 
 ## About
-Toktive (name not final, suggestions are appreciated) is an API that allows a client/consumer to share their post to all networks in a single action. For now the plan is to make FB and Twitter share work utilizing other third-party APIs for each network.
+Toktive (name not final, suggestions are appreciated) is an API that allows a client/consumer to share their post to all networks in a single action. For now the plan is to make ~~Facebook~~ FB Pages and Twitter share work utilizing other third-party APIs for each network.
+
+* Note: FB doesn't anymore allow sharing via their APIs, as permissions have been removed. The client has to open an external browser/tab, which is out of this project's scope. See https://developers.facebook.com/docs/graph-api/changelog/breaking-changes#login-4-24 
 
 ## Motivation
 Ever thought of a post, but ran into the hassle of opening Twitter, Facebook, Instagram, etc. and share it to each and everyone of them? This is the problem every social media/community manager faces everyday.
@@ -15,13 +17,13 @@ I made this application in Eclipse 2020-06 (4.16.0), with full support for Java 
 
 To set this up in Eclipse, all you need to do is simply:
 1. Import the project via Git.
-2. Setup config files under src/main/resource folder. Remove the SAMPLE prepend on the file name and put your respective dev token values.
+2. Setup config files under src/main/resource folder. Remove the `SAMPLE` prepend on the file name and put your respective dev token values.
     - Setup your own Twitter dev tokens via https://developer.twitter.com/ if you don't have one yet.
-    - Setup your own Facebook access token via https://developers.facebook.com/ 
+    - Setup your own Facebook access token and permissions via https://developers.facebook.com/ 
 3. Run an mvn install and update the project. 
 4. You may run the application through the main class `io.github.jmgloria07.toktive.ToktiveApplication` to do functional tests. 
 
-While this is created using Eclipse, it's not required build this project. 
+While this is created using Eclipse, it's not required build this project. I only went with this IDE since Eclipse is already installed on my machine.
 
 You may even use notepad and manually create the jar if you wish. Please look up for the equivalent steps for your preferred method/IDE.
 
@@ -30,14 +32,13 @@ Use `io.github.jmgloria07.toktive.Toktive` and create a singleton instance. Then
 
 ## Future plans
 - Handle errors with exceptions.
-- ~~Lookup for any API that would let the app post to FB~~ FB doesn't anymore allow sharing via APIs, as permissions have been removed. With this, the client has to open an external browser. See https://developers.facebook.com/docs/graph-api/changelog/breaking-changes#login-4-24 
-- Posting to your Facebook Page may be possible though, will be implementing that shortly.
+- ~~Lookup for any API that would let the app post to FB~~ 
 - Proper logging
 - -----------release 1.0------------------
 - ~~Currently utilizes property files to work with access tokens, but planning to extend this further to use a DB (H2, perhaps?).~~ I wonder what's the best practice here? I think it's better to have a separate service to login instead. Consumer key and secret can be saved via property but access tokens aren't supposed to be. I should let the client application do the DB.
 - Support other SNS platforms (LinkedIn? IG? Stories? Tik...Tok?). 
-    - I was supposed to use Spring Social for this, but found out that API has already been deprecated.
+    - I was supposed to use Spring Social for this, but found out that the said API has already been deprecated.
 - Support images..?
 - Make a separate web project that uses this API, could be Angular/React this time.
-- Remove the API dependencies per SNS and manually create a simple implementation 
+- Remove the API dependencies per SNS and manually create a simple implementation. This project only needs like two to five methods per jar, it would be nice to lessen unnecessary couplings.
 - The API is highly extensible, so a smartphone app can use this.
