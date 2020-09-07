@@ -10,7 +10,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import io.github.jmgloria07.toktive.api.business.ToktiveService;
+import io.github.jmgloria07.toktive.api.business.ToktiveShareService;
 
 public class ToktiveTest {
 	
@@ -29,7 +29,7 @@ public class ToktiveTest {
 	@Test
 	public void testShare() {
 		Toktive unit = Toktive.getInstance();
-		Toktive.toktiveService = mock(ToktiveService.class);
+		Toktive.toktiveService = mock(ToktiveShareService.class);
 		doNothing().when(Toktive.toktiveService).share(anyString(), anySet());
 		unit.share(TEST_MESSAGE, MOCK_NETWORKS);
 		unit.close();
@@ -38,7 +38,7 @@ public class ToktiveTest {
 	@Test
 	public void testShareThrowException() {
 		Toktive unit = Toktive.getInstance();
-		Toktive.toktiveService = mock(ToktiveService.class);
+		Toktive.toktiveService = mock(ToktiveShareService.class);
 		doThrow(RuntimeException.class).when(Toktive.toktiveService).share(anyString(), anySet());
 		assertThrows(RuntimeException.class, 
 				() -> unit.share(TEST_MESSAGE, MOCK_NETWORKS));

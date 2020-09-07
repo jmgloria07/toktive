@@ -1,4 +1,4 @@
-package io.github.jmgloria07.toktive.api.business.authentication;
+package io.github.jmgloria07.toktive.api.business.call;
 
 import static org.mockito.Mockito.mock;
 
@@ -7,11 +7,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FacebookPageAuthTest {
-	private static FacebookPageAuth unit;
+	private static FacebookPageCall unit;
 	
 	@BeforeAll
 	public static void init() {
-		unit = mock(FacebookPageAuth.class);
+		unit = mock(FacebookPageCall.class);
 	}
 	
 	@Test

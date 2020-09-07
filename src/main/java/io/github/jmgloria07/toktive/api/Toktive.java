@@ -6,7 +6,7 @@ import java.util.Set;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import io.github.jmgloria07.toktive.api.business.ToktiveService;
+import io.github.jmgloria07.toktive.api.business.ToktiveShareService;
 import io.github.jmgloria07.toktive.api.config.ToktiveConfig;
 import io.github.jmgloria07.toktive.api.objects.ToktiveResponse;
 
@@ -18,7 +18,7 @@ public class Toktive implements AutoCloseable, Serializable {
 	
 	volatile static Toktive toktive;
 	
-	static ToktiveService toktiveService;
+	static ToktiveShareService toktiveService;
 	
 	//restrict instantiation outside the class
 	private Toktive() {
@@ -33,7 +33,7 @@ public class Toktive implements AutoCloseable, Serializable {
 		if (!isInstantiated()) {
 			synchronized (Toktive.class) {
 				appContext = new AnnotationConfigApplicationContext(ToktiveConfig.class);
-				toktiveService = appContext.getBean(ToktiveService.class);
+				toktiveService = appContext.getBean(ToktiveShareService.class);
 				toktive = new Toktive();
 			}
 		}

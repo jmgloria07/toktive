@@ -1,4 +1,6 @@
-package io.github.jmgloria07.toktive.api.objects;
+package io.github.jmgloria07.toktive.api.objects.messages;
+
+import io.github.jmgloria07.toktive.api.objects.SocialNetwork;
 
 public class SocialMessage {
 	protected String message;

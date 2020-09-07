@@ -8,16 +8,16 @@ import org.springframework.stereotype.Component;
 import com.restfb.exception.FacebookException;
 import com.restfb.json.JsonObject;
 
-import io.github.jmgloria07.toktive.api.business.authentication.FacebookPageAuth;
-import io.github.jmgloria07.toktive.api.objects.SocialMessage;
+import io.github.jmgloria07.toktive.api.business.call.FacebookPageCall;
 import io.github.jmgloria07.toktive.api.objects.SocialNetwork;
 import io.github.jmgloria07.toktive.api.objects.SocialStatus;
+import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
 
 @Component
 public class FacebookPageShareStrategy implements ShareStrategy {
 	
 	@Autowired
-	FacebookPageAuth auth;
+	FacebookPageCall auth;
 	
 	private static final String URL_FB_PREPEND = "https://facebook.com/";
 

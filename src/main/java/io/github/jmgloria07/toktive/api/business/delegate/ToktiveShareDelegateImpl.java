@@ -10,18 +10,18 @@ import org.springframework.stereotype.Component;
 
 import io.github.jmgloria07.toktive.api.business.share.ShareStrategy;
 import io.github.jmgloria07.toktive.api.business.share.ShareStrategyContext;
-import io.github.jmgloria07.toktive.api.objects.SocialMessage;
 import io.github.jmgloria07.toktive.api.objects.SocialStatus;
 import io.github.jmgloria07.toktive.api.objects.ToktiveError;
 import io.github.jmgloria07.toktive.api.objects.ToktiveResponse;
+import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
 
 @Component
-public class SocialDelegateImpl implements SocialDelegate {
+public class ToktiveShareDelegateImpl implements ToktiveShareDelegate {
 
 	@Autowired
 	private ShareStrategyContext shareStrategyContext;
 	
-	public SocialDelegateImpl(ShareStrategyContext shareStrategyContext) {
+	public ToktiveShareDelegateImpl(ShareStrategyContext shareStrategyContext) {
 		this.shareStrategyContext = shareStrategyContext;
 	}
 	
@@ -37,7 +37,7 @@ public class SocialDelegateImpl implements SocialDelegate {
 		
 		//create list of response objects
 		List<ToktiveResponse> response = socialStatuses.parallelStream()
-				.map(SocialDelegateImpl::buildResponse)
+				.map(ToktiveShareDelegateImpl::buildResponse)
 				.collect(Collectors.toList());
 		
 		return response;

@@ -10,14 +10,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import io.github.jmgloria07.toktive.api.business.share.ShareStrategyContext;
-import io.github.jmgloria07.toktive.api.objects.SocialMessage;
+import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
 
 public class SocialDelegateImplTest {
-	private static SocialDelegateImpl unit;
+	private static ToktiveShareDelegateImpl unit;
 	
 	@BeforeAll
 	public static void init() {
-		unit = new SocialDelegateImpl(mock(ShareStrategyContext.class));	
+		unit = new ToktiveShareDelegateImpl(mock(ShareStrategyContext.class));	
 	}
 	
 	/* 

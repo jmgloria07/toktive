@@ -1,4 +1,4 @@
-package io.github.jmgloria07.toktive.api.business.authentication;
+package io.github.jmgloria07.toktive.api.business.call;
 
 import java.util.Optional;
 
@@ -17,7 +17,7 @@ import twitter4j.conf.ConfigurationBuilder;
 
 @Configuration
 @PropertySource("classpath:api.tokens.properties")
-public class TwitterAuth {
+public class TwitterCall {
 	
 	@Value("${twitter.oauth.consumerKey}")
 	private String CONSUMER_KEY;
@@ -33,7 +33,6 @@ public class TwitterAuth {
 
 	@Autowired
 	Twitter twitter;
-	
 	
 	public Status publish(String tweet) throws TwitterException {
 		Optional<Status> status = Optional.empty();

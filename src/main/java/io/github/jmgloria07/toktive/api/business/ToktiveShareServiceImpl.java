@@ -7,18 +7,18 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import io.github.jmgloria07.toktive.api.business.delegate.SocialDelegate;
-import io.github.jmgloria07.toktive.api.objects.SocialMessage;
+import io.github.jmgloria07.toktive.api.business.delegate.ToktiveShareDelegate;
 import io.github.jmgloria07.toktive.api.objects.SocialNetwork;
 import io.github.jmgloria07.toktive.api.objects.ToktiveResponse;
+import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
 
 @Service
-public class ToktiveServiceImpl implements ToktiveService {
+public class ToktiveShareServiceImpl implements ToktiveShareService {
 	
 	@Autowired
-	final SocialDelegate socialDelegate;
+	final ToktiveShareDelegate socialDelegate;
 	
-	public ToktiveServiceImpl(SocialDelegate socialDelegate) {
+	public ToktiveShareServiceImpl(ToktiveShareDelegate socialDelegate) {
 		this.socialDelegate = socialDelegate;
 	}
 	

@@ -1,4 +1,4 @@
-package io.github.jmgloria07.toktive.api.business.authentication;
+package io.github.jmgloria07.toktive.api.business.call;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +15,7 @@ import com.restfb.json.JsonObject;
 
 @Configuration
 @PropertySource("classpath:api.tokens.properties")
-public class FacebookPageAuth {	
+public class FacebookPageCall {	
 	
 	@Value("${fb.oauth.access.token}")
 	private String ACCESS_TOKEN;
@@ -28,10 +28,6 @@ public class FacebookPageAuth {
 		
 	@Autowired
 	FacebookClient facebookClient;
-	
-	public FacebookPageAuth() {
-		
-	}
 	
 	public JsonObject publishPost(String message) {		
 		return facebookClient.publish(PAGE_NAME + URL_FEED, JsonObject.class, Parameter.with(KEY_MESSAGE, message));

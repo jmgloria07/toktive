@@ -5,11 +5,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import io.github.jmgloria07.toktive.api.business.authentication.TwitterAuth;
-import io.github.jmgloria07.toktive.api.objects.SocialMessage;
+import io.github.jmgloria07.toktive.api.business.call.TwitterCall;
 import io.github.jmgloria07.toktive.api.objects.SocialNetwork;
 import io.github.jmgloria07.toktive.api.objects.SocialStatus;
-
+import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
 import twitter4j.Status;
 import twitter4j.TwitterException;
 
@@ -17,7 +16,7 @@ import twitter4j.TwitterException;
 public class TwitterShareStrategy implements ShareStrategy {
 
 	@Autowired
-	private TwitterAuth auth;
+	private TwitterCall auth;
 	
 	private static final String URL_TWITTER_PREPEND = "https://twitter.com/i/web/status/";
 	

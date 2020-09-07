@@ -10,11 +10,11 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import io.github.jmgloria07.toktive.api.business.delegate.SocialDelegate;
+import io.github.jmgloria07.toktive.api.business.delegate.ToktiveShareDelegate;
 
 public class ToktiveServiceImplTest {
 	
-	private static ToktiveServiceImpl unit;
+	private static ToktiveShareServiceImpl unit;
 	
 	private static Set<String> MOCK_SET_SNS;
 	private static final String MOCK_MESSAGE = "This is a mock message.";
@@ -23,7 +23,7 @@ public class ToktiveServiceImplTest {
 	
 	@BeforeAll
 	public static void init() {
-		unit = new ToktiveServiceImpl(mock(SocialDelegate.class));
+		unit = new ToktiveShareServiceImpl(mock(ToktiveShareDelegate.class));
 		MOCK_SET_SNS = new HashSet<>(
 				Arrays.asList(MOCK_SNS.split(",")));
 	}

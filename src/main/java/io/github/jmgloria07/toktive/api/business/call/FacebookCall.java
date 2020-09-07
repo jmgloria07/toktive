@@ -1,18 +1,18 @@
-package io.github.jmgloria07.toktive.api.business.authentication;
+package io.github.jmgloria07.toktive.api.business.call;
 
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Version;
 
 @Deprecated
-public class FacebookAuth {
+public class FacebookCall {
 	
 	//include in property file
 	private static final String accessToken = "XXXXXXXXXXXX";
 	
 	private static FacebookClient fbClient;
 	
-	private FacebookAuth() {
+	private FacebookCall() {
 		
 	}
 	

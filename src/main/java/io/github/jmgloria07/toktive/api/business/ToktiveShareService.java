@@ -5,7 +5,7 @@ import java.util.Set;
 
 import io.github.jmgloria07.toktive.api.objects.ToktiveResponse;
 
-public interface ToktiveService {
+public interface ToktiveShareService {
 	
 	public List<ToktiveResponse> share(String message, Set<String> networks);
 }

@@ -15,4 +15,9 @@ public class ToktiveError {
 	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
+
+	@Override
+	public String toString() {
+		return "ToktiveError [errorMessage=" + errorMessage + "]";
+	}
 }

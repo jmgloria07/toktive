@@ -1,4 +1,4 @@
-package io.github.jmgloria07.toktive.api.business.authentication;
+package io.github.jmgloria07.toktive.api.business.call;
 
 import static org.mockito.Mockito.*;
 
@@ -10,11 +10,11 @@ import twitter4j.TwitterException;
 
 public class TwitterAuthTest {
 	
-	private static TwitterAuth unit;
+	private static TwitterCall unit;
 	
 	@BeforeAll
 	public static void init() {
-		unit = mock(TwitterAuth.class);
+		unit = mock(TwitterCall.class);
 	}
 	
 	@Test
