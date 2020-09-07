@@ -11,8 +11,8 @@ public class ToktiveApplication {
 	public static void main(String[] args) {
 		Toktive toktive = Toktive.getInstance();
 		List<ToktiveResponse> response = toktive
-				.share("Last test before I eat.", 
-						new HashSet<>(Arrays.asList("TW")));
+				.share("Test post", 
+						new HashSet<>(Arrays.asList("FB_PAGES", "TW")));
 		System.out.println(response);
 		toktive.close();
 	}
