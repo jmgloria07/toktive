@@ -10,6 +10,7 @@ import io.github.jmgloria07.toktive.api.objects.SocialMessage;
 import io.github.jmgloria07.toktive.api.objects.SocialNetwork;
 import io.github.jmgloria07.toktive.api.objects.SocialStatus;
 
+@Deprecated
 @Component
 public class FacebookShareStrategy implements ShareStrategy {
 		

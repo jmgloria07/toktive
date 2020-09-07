@@ -4,6 +4,7 @@ import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Version;
 
+@Deprecated
 public class FacebookAuth {
 	
 	//include in property file
