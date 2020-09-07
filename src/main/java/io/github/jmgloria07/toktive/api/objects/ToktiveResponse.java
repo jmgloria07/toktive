@@ -6,6 +6,8 @@ public class ToktiveResponse {
 	private String url;
 	
 	private String status;
+	
+	private ToktiveError error;
 
 	public String getId() {
 		return id;
@@ -13,11 +15,6 @@ public class ToktiveResponse {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	@Override
-	public String toString() {
-		return "ToktiveResponse [id=" + id + ", url=" + url + ", status=" + status + "]";
 	}
 
 	public String getUrl() {
@@ -34,5 +31,18 @@ public class ToktiveResponse {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public ToktiveError getError() {
+		return error;
+	}
+
+	public void setError(ToktiveError error) {
+		this.error = error;
+	}
+	
+	@Override
+	public String toString() {
+		return "ToktiveResponse [id=" + id + ", url=" + url + ", status=" + status + ", error=" + error + "]";
 	}
 }

@@ -17,7 +17,7 @@ public class ShareStrategyContextTest {
 	@BeforeAll
 	public static void init() {		
 		Set<ShareStrategy> mockSetStrats = new HashSet<>();
-		mockSetStrats.add(new FacebookShareStrategy());
+		mockSetStrats.add(new FacebookPageShareStrategy());
 		mockSetStrats.add(new TwitterShareStrategy());
 		unit = new ShareStrategyContext(mockSetStrats);
 	}
@@ -27,8 +27,8 @@ public class ShareStrategyContextTest {
 	 */
 	@Test
 	public void testFbStrategy() {
-		ShareStrategy shareStrategy = unit.getStrategy(SocialNetwork.FB);
-		assertTrue(shareStrategy instanceof FacebookShareStrategy);
+		ShareStrategy shareStrategy = unit.getStrategy(SocialNetwork.FB_PAGES);
+		assertTrue(shareStrategy instanceof FacebookPageShareStrategy);
 	}
 	
 	@Test
