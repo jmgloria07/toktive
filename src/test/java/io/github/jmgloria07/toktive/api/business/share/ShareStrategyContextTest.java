@@ -1,5 +1,6 @@
 package io.github.jmgloria07.toktive.api.business.share;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import io.github.jmgloria07.toktive.api.objects.SocialNetwork;
+import io.github.jmgloria07.toktive.api.objects.exceptions.ToktiveServiceParameterException;
 
 public class ShareStrategyContextTest {
 	private static ShareStrategyContext unit;	
@@ -35,6 +37,16 @@ public class ShareStrategyContextTest {
 	public void testTwStrategy() {
 		ShareStrategy shareStrategy = unit.getStrategy(SocialNetwork.TW);
 		assertTrue(shareStrategy instanceof TwitterShareStrategy);
+	}
+	
+	/*
+	 * Test the unit's behavior if it wasn't included in the strategy set.
+	 * FB wasn't included at the mocked strategy set
+	 */
+	@Test
+	public void testStrategyNotFound() {
+		assertThrows(ToktiveServiceParameterException.class, 
+				() -> unit.getStrategy(SocialNetwork.FB));
 	}
 	
 	@AfterAll

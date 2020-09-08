@@ -1,10 +1,10 @@
 package io.github.jmgloria07.toktive.api.business.delegate;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +15,9 @@ import io.github.jmgloria07.toktive.api.objects.ToktiveError;
 import io.github.jmgloria07.toktive.api.objects.ToktiveResponse;
 import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
 
+/*
+ * Default implementation of the share delegate
+ */
 @Component
 public class ToktiveShareDelegateImpl implements ToktiveShareDelegate {
 
@@ -44,14 +47,15 @@ public class ToktiveShareDelegateImpl implements ToktiveShareDelegate {
 	}
 	
 	private static ToktiveResponse buildResponse(SocialStatus socialStatus) {
-		ToktiveResponse result = new ToktiveResponse();
-		result.setId(socialStatus.getLink());
+		ToktiveResponse result = new ToktiveResponse(); 
 		result.setUrl(socialStatus.getLink());
 		result.setStatus(socialStatus.getStatus().toString());
-		if (StringUtils.isNotEmpty(socialStatus.getErrorMessage())) {
-			ToktiveError error = new ToktiveError(socialStatus.getErrorMessage());
-			result.setError(error);
-		}
+		result.setError(
+			Optional.ofNullable(socialStatus.getErrorMessage())
+			.filter(str -> !str.isEmpty())
+			.map(errorMessage -> new ToktiveError(errorMessage))
+			.orElseGet(null)
+		);
 		return result;
 	}
 

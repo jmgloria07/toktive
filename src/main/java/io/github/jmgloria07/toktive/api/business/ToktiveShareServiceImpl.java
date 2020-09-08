@@ -8,18 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.github.jmgloria07.toktive.api.business.delegate.ToktiveShareDelegate;
-import io.github.jmgloria07.toktive.api.objects.SocialNetwork;
+import io.github.jmgloria07.toktive.api.business.util.builder.SocialMessageBuilder;
 import io.github.jmgloria07.toktive.api.objects.ToktiveResponse;
 import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
 
+/*
+ * Default share service implementation
+ */
 @Service
 public class ToktiveShareServiceImpl implements ToktiveShareService {
 	
 	@Autowired
-	final ToktiveShareDelegate socialDelegate;
+	final ToktiveShareDelegate toktiveShareDelegate;
 	
-	public ToktiveShareServiceImpl(ToktiveShareDelegate socialDelegate) {
-		this.socialDelegate = socialDelegate;
+	public ToktiveShareServiceImpl(ToktiveShareDelegate toktiveShareDelegate) {
+		this.toktiveShareDelegate = toktiveShareDelegate;
 	}
 	
 	@Override
@@ -27,13 +30,13 @@ public class ToktiveShareServiceImpl implements ToktiveShareService {
 
 		Set<SocialMessage> socialMessages = networks.stream()
 		.map(network -> {
-			SocialMessage socialMessage = new SocialMessage();
-			socialMessage.setMessage(message);
-			socialMessage.setSocialNetwork(SocialNetwork.valueOf(network));
-			return socialMessage;
+			SocialMessageBuilder soci = new SocialMessageBuilder();
+			return soci.withMessage(message)
+					.withSocialNetwork(network)
+					.build();
 		}).collect(Collectors.toSet());
 		
-		return socialDelegate.shareToAllNetworks(socialMessages);
+		return toktiveShareDelegate.shareToAllNetworks(socialMessages);
 	}
 
 }

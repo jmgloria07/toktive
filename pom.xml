@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.jmgloria07</groupId>
 	<artifactId>toktive</artifactId>
-	<version>0.5.1-SNAPSHOT</version>
+	<version>0.6.1-SNAPSHOT</version>
 	<name>toktive</name>
 	<description>Toktive</description>
 
@@ -35,12 +35,6 @@
 		    <version>3.5.10</version>
 		    <scope>test</scope>
 		</dependency>		
-				
-		<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-lang3</artifactId>
-		    <version>3.11</version>
-		</dependency>
 		
 		<!-- access twitter api -->
 		<dependency>
