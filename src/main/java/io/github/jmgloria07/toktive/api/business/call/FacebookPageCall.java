@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
@@ -34,12 +33,8 @@ public class FacebookPageCall {
 	}
 	
 	@Bean
-	public FacebookClient setFacebookClient() {
+	public FacebookClient facebookClient() {
 		return new DefaultFacebookClient(ACCESS_TOKEN, Version.VERSION_8_0);
 	}
 	
-	@Bean
-	public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
-		return new PropertySourcesPlaceholderConfigurer();
-	}
 }

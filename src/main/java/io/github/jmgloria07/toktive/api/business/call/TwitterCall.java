@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -46,7 +45,7 @@ public class TwitterCall {
 	}
 	
 	@Bean
-	public Twitter setTwitter() {
+	public Twitter twitter() {
 		ConfigurationBuilder configBuilder = new ConfigurationBuilder();
 	    configBuilder.setDebugEnabled(true)
 	    .setOAuthConsumerKey(CONSUMER_KEY)
@@ -57,10 +56,4 @@ public class TwitterCall {
 	    TwitterFactory twitterFactory = new TwitterFactory(configBuilder.build());
 	    return twitterFactory.getInstance();
 	}
-	
-	@Bean
-	public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
-		return new PropertySourcesPlaceholderConfigurer();
-	}
-	
 }
