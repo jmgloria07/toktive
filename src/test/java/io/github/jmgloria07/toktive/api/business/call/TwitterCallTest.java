@@ -1,26 +1,30 @@
 package io.github.jmgloria07.toktive.api.business.call;
 
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class FacebookPageAuthTest {
-	private static FacebookPageCall unit;
+import twitter4j.TwitterException;
+
+public class TwitterCallTest {
+	
+	private static TwitterCall unit;
 	
 	@BeforeAll
 	public static void init() {
-		unit = mock(FacebookPageCall.class);
+		unit = mock(TwitterCall.class);
 	}
 	
 	@Test
-	public void testGetTwitterInstance() {
-		unit.publishPost("");
+	public void testGetTwitterInstance() throws TwitterException {
+		unit.publish("");
 	}
 	
 	@AfterAll
 	public static void destroy() {
 		unit = null;
 	}
+	
 }

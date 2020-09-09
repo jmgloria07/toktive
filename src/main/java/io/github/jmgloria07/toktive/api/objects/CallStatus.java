@@ -1,9 +1,10 @@
 package io.github.jmgloria07.toktive.api.objects;
 
-public class SocialStatus {
+public class CallStatus {
 	public enum Status {
 		SUCCESS,
-		FAIL
+		FAIL,
+		PARTIAL
 	}
 	
 	private Status status;
@@ -12,11 +13,11 @@ public class SocialStatus {
 	
 	private String errorMessage;
 
-	public SocialStatus() {
+	public CallStatus() {
 		
 	}
 	
-	public SocialStatus(Status status, String link, String errorMessage) {
+	public CallStatus(Status status, String link, String errorMessage) {
 		super();
 		this.status = status;
 		this.link = link;
@@ -45,6 +46,10 @@ public class SocialStatus {
 
 	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
+	}
+	
+	public boolean isCallSuccessful() {
+		return getStatus() == Status.SUCCESS;
 	}
 	
 	@Override

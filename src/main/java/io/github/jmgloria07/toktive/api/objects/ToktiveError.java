@@ -8,6 +8,10 @@ public class ToktiveError {
 		this.errorMessage = errorMessage;
 	}
 	
+	public ToktiveError() {
+		super();
+	}
+
 	public String getErrorMessage() {
 		return errorMessage;
 	}

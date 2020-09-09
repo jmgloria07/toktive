@@ -25,7 +25,7 @@ public class ShareStrategyContext {
 	
 	public ShareStrategy getStrategy(SocialNetwork network) {
 		return strategies.stream()
-		.filter(strategy -> strategy.getStrategyName().equals(network))
+		.filter(strategy -> strategy.getStrategyName() == network)
 		.findFirst()
 		.orElseThrow( () -> 
 			new ToktiveServiceParameterException("network", network.toString()));

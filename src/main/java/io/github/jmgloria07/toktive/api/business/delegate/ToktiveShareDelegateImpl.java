@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import io.github.jmgloria07.toktive.api.business.share.ShareStrategy;
 import io.github.jmgloria07.toktive.api.business.share.ShareStrategyContext;
-import io.github.jmgloria07.toktive.api.objects.SocialStatus;
+import io.github.jmgloria07.toktive.api.objects.CallStatus;
 import io.github.jmgloria07.toktive.api.objects.ToktiveError;
 import io.github.jmgloria07.toktive.api.objects.ToktiveResponse;
 import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
@@ -32,7 +32,7 @@ public class ToktiveShareDelegateImpl implements ToktiveShareDelegate {
 	public List<ToktiveResponse> shareToAllNetworks(Set<SocialMessage> socialMessages) {
 		
 		//do each strategy
-		Set<SocialStatus> socialStatuses = socialMessages.stream()
+		Set<CallStatus> socialStatuses = socialMessages.stream()
 			.map(socialMessage -> {
 				ShareStrategy strategy = shareStrategyContext.getStrategy(socialMessage.getSocialNetwork());
 				return strategy.share(socialMessage);
@@ -46,7 +46,7 @@ public class ToktiveShareDelegateImpl implements ToktiveShareDelegate {
 		return response;
 	}
 	
-	private static ToktiveResponse buildResponse(SocialStatus socialStatus) {
+	private static ToktiveResponse buildResponse(CallStatus socialStatus) {
 		ToktiveResponse result = new ToktiveResponse(); 
 		result.setUrl(socialStatus.getLink());
 		result.setStatus(socialStatus.getStatus().toString());
@@ -54,7 +54,7 @@ public class ToktiveShareDelegateImpl implements ToktiveShareDelegate {
 			Optional.ofNullable(socialStatus.getErrorMessage())
 			.filter(str -> !str.isEmpty())
 			.map(errorMessage -> new ToktiveError(errorMessage))
-			.orElseGet(null)
+			.orElseGet(() -> null)
 		);
 		return result;
 	}

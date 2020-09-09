@@ -9,8 +9,8 @@ import com.restfb.exception.FacebookException;
 import com.restfb.json.JsonObject;
 
 import io.github.jmgloria07.toktive.api.business.call.FacebookPageCall;
+import io.github.jmgloria07.toktive.api.objects.CallStatus;
 import io.github.jmgloria07.toktive.api.objects.SocialNetwork;
-import io.github.jmgloria07.toktive.api.objects.SocialStatus;
 import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
 
 @Component
@@ -24,7 +24,7 @@ public class FacebookPageShareStrategy implements ShareStrategy {
 	private static final String KEY_ID = "id";
 
 	@Override
-	public SocialStatus share(SocialMessage message) {
+	public CallStatus share(SocialMessage message) {
 		
 		Optional<JsonObject> result = Optional.empty();
 		String errorMessage = "";
@@ -35,24 +35,24 @@ public class FacebookPageShareStrategy implements ShareStrategy {
 			errorMessage = e.getMessage();
 		}
 		
-		SocialStatus returnVal = buildSocialStatus(result, errorMessage);
+		CallStatus returnVal = buildSocialStatus(result, errorMessage);
 		
 		return returnVal;
 	}
 
-	private SocialStatus buildSocialStatus(Optional<JsonObject> result, String errorMessage) {
+	private CallStatus buildSocialStatus(Optional<JsonObject> result, String errorMessage) {
 		
-		SocialStatus.Status status = SocialStatus.Status.FAIL;
+		CallStatus.Status status = CallStatus.Status.FAIL;
 		String link = "";
 		
 		if (result.isPresent()) {
 			link = URL_FB_PREPEND + result.get().getString(KEY_ID, "");
-			status = SocialStatus.Status.SUCCESS;
+			status = CallStatus.Status.SUCCESS;
 		} 
 		
 		//TODO: better logging
 		System.out.println(status + " " + link + " " + errorMessage);
-		return new SocialStatus(status, link, errorMessage);
+		return new CallStatus(status, link, errorMessage);
 	}
 
 	@Override
