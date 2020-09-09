@@ -31,9 +31,8 @@ You may even use notepad and manually create the jar if you wish. Please look up
 Use `io.github.jmgloria07.toktive.Toktive` and create a singleton instance. Then call the `share` method with the supplied parameters `message` and `networks`. See sample usage at `io.github.jmgloria07.toktive.ToktiveApplication`
 
 ## Future plans
-- Handle errors with exceptions.
 - ~~Lookup for any API that would let the app post to FB~~ 
-- Proper logging
+- Proper logging: on-progress
 - -----------release 1.0------------------
 - ~~Currently utilizes property files to work with access tokens, but planning to extend this further to use a DB (H2, perhaps?).~~ I wonder what's the best practice here? I think it's better to have a separate service to login instead. Consumer key and secret can be saved via property but access tokens aren't supposed to be. I should let the client application do the DB. 
 - A singleton implementation on the Toktive class makes sense for now, since we could use a single instance across sessions and that the tokens are hardcoded in the property file. But this should be changed when authentication's implementation is made such that there's a need for a different access token per session.
