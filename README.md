@@ -17,9 +17,10 @@ I made this application in Eclipse 2020-06 (4.16.0), with full support for Java 
 
 To set this up in Eclipse, all you need to do is simply:
 1. Import the project via Git.
-2. Setup config files under src/main/resource folder. Remove the `SAMPLE` prepend on the file name and put your respective dev token values.
+2. Setup config files under src/main/resource folder. Remove the `SAMPLE` prepend on the file name and put your custom values.
     - Setup your own Twitter dev tokens via https://developer.twitter.com/ if you don't have one yet.
-    - Setup your own Facebook access token and permissions via https://developers.facebook.com/ 
+    - Setup your own Facebook access token and permissions via https://developers.facebook.com/
+    - Setup your own log4j2.properties. Sample is provided but you can customize your logging the way you want.
 3. Run an mvn install and update the project. 
 4. You may run the application through the main class `io.github.jmgloria07.toktive.ToktiveApplication` to do functional tests. 
 
@@ -32,7 +33,7 @@ Use `io.github.jmgloria07.toktive.Toktive` and create a singleton instance. Then
 
 ## Future plans
 - ~~Lookup for any API that would let the app post to FB~~ 
-- Proper logging: on-progress
+- Proper logging: minimal implementation done
 - -----------release 1.0------------------
 - ~~Currently utilizes property files to work with access tokens, but planning to extend this further to use a DB (H2, perhaps?).~~ I wonder what's the best practice here? I think it's better to have a separate service to login instead. Consumer key and secret can be saved via property but access tokens aren't supposed to be. I should let the client application do the DB. 
 - A singleton implementation on the Toktive class makes sense for now, since we could use a single instance across sessions and that the tokens are hardcoded in the property file. But this should be changed when authentication's implementation is made such that there's a need for a different access token per session.

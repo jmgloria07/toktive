@@ -54,6 +54,6 @@ public class CallStatus {
 	
 	@Override
 	public String toString() {
-		return "SocialStatus [status=" + status + ", link=" + link + "]";
+		return "CallStatus [status=" + status + ", link=" + link + ", errorMessage=" + errorMessage + "]";
 	}
 }

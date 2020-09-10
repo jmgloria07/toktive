@@ -27,14 +27,13 @@ public class ToktiveShareServiceImpl implements ToktiveShareService {
 	
 	@Override
 	public List<ToktiveResponse> share(String message, Set<String> networks) {
-
 		Set<SocialMessage> socialMessages = networks.stream()
-		.map(network -> {
-			SocialMessageBuilder soci = new SocialMessageBuilder();
-			return soci.withMessage(message)
-					.withSocialNetwork(network)
-					.build();
-		}).collect(Collectors.toSet());
+			.map(network -> {
+				SocialMessageBuilder soci = new SocialMessageBuilder();
+				return soci.withMessage(message)
+						.withSocialNetwork(network)
+						.build();
+			}).collect(Collectors.toSet());
 		
 		return toktiveShareDelegate.shareToAllNetworks(socialMessages);
 	}
