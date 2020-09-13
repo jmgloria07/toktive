@@ -14,6 +14,7 @@ import io.github.jmgloria07.toktive.api.business.call.FacebookPageCall;
 import io.github.jmgloria07.toktive.api.business.util.LogUtil;
 import io.github.jmgloria07.toktive.api.objects.CallStatus;
 import io.github.jmgloria07.toktive.api.objects.SocialNetwork;
+import io.github.jmgloria07.toktive.api.objects.exceptions.ToktiveServiceParameterException;
 import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
 
 @Component
@@ -33,8 +34,12 @@ public class FacebookPageShareStrategy implements ShareStrategy {
 		final String METHOD_NAME = "share";
 		LogUtil.logStartMethod(LOG, METHOD_NAME);
 		
+		Optional.ofNullable(message)
+		.orElseThrow(
+				() -> new ToktiveServiceParameterException(SocialMessage.class.toString()));
+		
 		Optional<JsonObject> result = Optional.empty();
-		String errorMessage = "";
+		String errorMessage = null;
 		
 		try {
 			result = Optional.of(auth.publishPost(message.getMessage()));
@@ -54,7 +59,7 @@ public class FacebookPageShareStrategy implements ShareStrategy {
 		LogUtil.logStartMethod(LOG, METHOD_NAME);
 		
 		CallStatus.Status status = CallStatus.Status.FAIL;
-		String link = "";
+		String link = null;
 		
 		if (result.isPresent()) {
 			link = URL_FB_PREPEND + result.get().getString(KEY_ID, "");

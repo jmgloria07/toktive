@@ -30,7 +30,7 @@ public class ToktiveTest {
 	public void testShare() {
 		Toktive unit = Toktive.getInstance();
 		Toktive.toktiveService = mock(ToktiveShareService.class);
-		doNothing().when(Toktive.toktiveService).share(anyString(), anySet());
+		doReturn(null).when(Toktive.toktiveService).share(anyString(), anySet());
 		unit.share(TEST_MESSAGE, MOCK_NETWORKS);
 		unit.close();
 	}

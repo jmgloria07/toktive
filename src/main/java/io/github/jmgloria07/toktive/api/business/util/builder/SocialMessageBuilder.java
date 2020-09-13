@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import io.github.jmgloria07.toktive.api.business.util.LogUtil;
 import io.github.jmgloria07.toktive.api.objects.SocialNetwork;
@@ -14,11 +15,13 @@ import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
 /*
  * class to build the parameter object and validate the individual properties.
  */
+@Component
 public class SocialMessageBuilder {
 	
 	private static final Logger LOG = LogManager.getLogger(SocialMessageBuilder.class);
 	
 	String message;
+	
 	SocialNetwork socialNetwork;
 	
 	public SocialMessageBuilder withSocialNetwork(String socialNetwork) {

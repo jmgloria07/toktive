@@ -11,6 +11,7 @@ import io.github.jmgloria07.toktive.api.business.call.TwitterCall;
 import io.github.jmgloria07.toktive.api.business.util.LogUtil;
 import io.github.jmgloria07.toktive.api.objects.CallStatus;
 import io.github.jmgloria07.toktive.api.objects.SocialNetwork;
+import io.github.jmgloria07.toktive.api.objects.exceptions.ToktiveServiceParameterException;
 import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
 import twitter4j.Status;
 import twitter4j.TwitterException;
@@ -21,7 +22,7 @@ public class TwitterShareStrategy implements ShareStrategy {
 	private static final Logger LOG = LogManager.getFormatterLogger(TwitterShareStrategy.class);
 	
 	@Autowired
-	private TwitterCall auth;
+	TwitterCall auth;
 	
 	private static final String URL_TWITTER_PREPEND = "https://twitter.com/i/web/status/";
 	
@@ -30,8 +31,12 @@ public class TwitterShareStrategy implements ShareStrategy {
 		final String METHOD_NAME = "share";
 		LogUtil.logStartMethod(LOG, METHOD_NAME);
 		
+		Optional.ofNullable(message)
+			.orElseThrow(
+					() -> new ToktiveServiceParameterException(SocialMessage.class.toString()));
+		
 		Optional<Status> status = Optional.empty();
-		String errorMessage = "";
+		String errorMessage = null;
 		try {
 			status = Optional.of(auth.publish(message.getMessage()));
 		} catch (TwitterException e) {
@@ -51,7 +56,7 @@ public class TwitterShareStrategy implements ShareStrategy {
 		final String METHOD_NAME = "buildSocialStatus";
 		LogUtil.logStartMethod(LOG, METHOD_NAME);
 		
-		String url = "";
+		String url = null;
 		CallStatus.Status socialStatus = CallStatus.Status.FAIL;
 		
 		if (status.isPresent()) {

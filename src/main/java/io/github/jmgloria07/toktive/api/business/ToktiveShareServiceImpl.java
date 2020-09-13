@@ -19,18 +19,16 @@ import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
 public class ToktiveShareServiceImpl implements ToktiveShareService {
 	
 	@Autowired
-	final ToktiveShareDelegate toktiveShareDelegate;
+	ToktiveShareDelegate toktiveShareDelegate;
 	
-	public ToktiveShareServiceImpl(ToktiveShareDelegate toktiveShareDelegate) {
-		this.toktiveShareDelegate = toktiveShareDelegate;
-	}
+	@Autowired
+	SocialMessageBuilder socialMessageBuilder;
 	
 	@Override
 	public List<ToktiveResponse> share(String message, Set<String> networks) {
 		Set<SocialMessage> socialMessages = networks.stream()
 			.map(network -> {
-				SocialMessageBuilder soci = new SocialMessageBuilder();
-				return soci.withMessage(message)
+				return socialMessageBuilder.withMessage(message)
 						.withSocialNetwork(network)
 						.build();
 			}).collect(Collectors.toSet());

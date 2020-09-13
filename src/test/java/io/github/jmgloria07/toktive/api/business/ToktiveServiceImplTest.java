@@ -1,7 +1,9 @@
 package io.github.jmgloria07.toktive.api.business;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +13,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import io.github.jmgloria07.toktive.api.business.delegate.ToktiveShareDelegate;
+import io.github.jmgloria07.toktive.api.business.util.builder.SocialMessageBuilder;
+import io.github.jmgloria07.toktive.api.objects.ToktiveResponse;
 
 public class ToktiveServiceImplTest {
 	
@@ -23,7 +27,15 @@ public class ToktiveServiceImplTest {
 	
 	@BeforeAll
 	public static void init() {
-		unit = new ToktiveShareServiceImpl(mock(ToktiveShareDelegate.class));
+		unit = new ToktiveShareServiceImpl();
+		
+		unit.toktiveShareDelegate = mock(ToktiveShareDelegate.class);
+		unit.socialMessageBuilder = mock(SocialMessageBuilder.class);
+		
+		doReturn(unit.socialMessageBuilder).when(unit.socialMessageBuilder).withMessage(anyString());
+		doReturn(unit.socialMessageBuilder).when(unit.socialMessageBuilder).withSocialNetwork(anyString());
+		doReturn(new ArrayList<ToktiveResponse>()).when(unit.toktiveShareDelegate).shareToAllNetworks(anySet());
+		
 		MOCK_SET_SNS = new HashSet<>(
 				Arrays.asList(MOCK_SNS.split(",")));
 	}
@@ -34,7 +46,7 @@ public class ToktiveServiceImplTest {
 	 */
 	@Test
 	public void testShare() {
-		unit.share(MOCK_MESSAGE, MOCK_SET_SNS);
+		assertNotNull(unit.share(MOCK_MESSAGE, MOCK_SET_SNS));
 	}
 	
 	@AfterAll

@@ -22,11 +22,7 @@ import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
 public class ToktiveShareDelegateImpl implements ToktiveShareDelegate {
 
 	@Autowired
-	private ShareStrategyContext shareStrategyContext;
-	
-	public ToktiveShareDelegateImpl(ShareStrategyContext shareStrategyContext) {
-		this.shareStrategyContext = shareStrategyContext;
-	}
+	ShareStrategyContext shareStrategyContext;
 	
 	@Override
 	public List<ToktiveResponse> shareToAllNetworks(Set<SocialMessage> socialMessages) {
@@ -46,7 +42,7 @@ public class ToktiveShareDelegateImpl implements ToktiveShareDelegate {
 		return response;
 	}
 	
-	private static ToktiveResponse buildResponse(CallStatus socialStatus) {
+	static ToktiveResponse buildResponse(CallStatus socialStatus) {
 		ToktiveResponse result = new ToktiveResponse(); 
 		result.setUrl(socialStatus.getLink());
 		result.setStatus(socialStatus.getStatus().toString());
