@@ -12,10 +12,10 @@ import com.restfb.json.JsonObject;
 
 import io.github.jmgloria07.toktive.api.business.call.FacebookPageCall;
 import io.github.jmgloria07.toktive.api.business.util.LogUtil;
-import io.github.jmgloria07.toktive.api.objects.CallStatus;
+import io.github.jmgloria07.toktive.api.objects.ToktiveCall;
+import io.github.jmgloria07.toktive.api.objects.ToktivePost;
 import io.github.jmgloria07.toktive.api.objects.SocialNetwork;
 import io.github.jmgloria07.toktive.api.objects.exceptions.ToktiveServiceParameterException;
-import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
 
 @Component
 public class FacebookPageShareStrategy implements ShareStrategy {
@@ -30,48 +30,48 @@ public class FacebookPageShareStrategy implements ShareStrategy {
 	private static final String KEY_ID = "id";
 
 	@Override
-	public CallStatus share(SocialMessage message) {
+	public ToktiveCall share(ToktivePost post) {
 		final String METHOD_NAME = "share";
 		LogUtil.logStartMethod(LOG, METHOD_NAME);
 		
-		Optional.ofNullable(message)
+		Optional.ofNullable(post)
 		.orElseThrow(
-				() -> new ToktiveServiceParameterException(SocialMessage.class.toString()));
+				() -> new ToktiveServiceParameterException(ToktivePost.class.toString()));
 		
 		Optional<JsonObject> result = Optional.empty();
 		String errorMessage = null;
 		
 		try {
-			result = Optional.of(auth.publishPost(message.getMessage()));
+			result = Optional.of(auth.publishPost(post.getPost()));
 		} catch (FacebookException e) {
 			LogUtil.logException(LOG, e);
 			errorMessage = e.getMessage();
 		}
 		
-		CallStatus returnVal = buildSocialStatus(result, errorMessage);
+		ToktiveCall returnVal = buildCallResponse(result, errorMessage);
 		
 		LogUtil.logEndMethod(LOG, METHOD_NAME);
 		return returnVal;
 	}
 
-	private CallStatus buildSocialStatus(Optional<JsonObject> result, String errorMessage) {
-		final String METHOD_NAME = "buildSocialStatus";
+	private ToktiveCall buildCallResponse(Optional<JsonObject> result, String errorMessage) {
+		final String METHOD_NAME = "buildCallResponse";
 		LogUtil.logStartMethod(LOG, METHOD_NAME);
 		
-		CallStatus.Status status = CallStatus.Status.FAIL;
+		ToktiveCall.Status status = ToktiveCall.Status.FAIL;
 		String link = null;
 		
 		if (result.isPresent()) {
 			link = URL_FB_PREPEND + result.get().getString(KEY_ID, "");
-			status = CallStatus.Status.SUCCESS;
+			status = ToktiveCall.Status.SUCCESS;
 		} 
 		
-		final CallStatus response = new CallStatus(status, link, errorMessage);
+		final ToktiveCall response = new ToktiveCall(status, link, errorMessage);
 		
 		LogUtil.logInfo(LOG, response.toString());
-		LogUtil.logValue(LOG, CallStatus.class.getName(), response.toString());
+		LogUtil.logValue(LOG, ToktiveCall.class.getName(), response.toString());
 		LogUtil.logEndMethod(LOG, METHOD_NAME);
-		return new CallStatus(status, link, errorMessage);
+		return new ToktiveCall(status, link, errorMessage);
 	}
 
 	@Override

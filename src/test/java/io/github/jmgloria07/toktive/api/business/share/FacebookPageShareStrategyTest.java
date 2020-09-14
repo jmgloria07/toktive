@@ -12,8 +12,8 @@ import com.restfb.json.JsonObject;
 
 import io.github.jmgloria07.toktive.api.business.call.FacebookPageCall;
 import io.github.jmgloria07.toktive.api.objects.SocialNetwork;
+import io.github.jmgloria07.toktive.api.objects.ToktivePost;
 import io.github.jmgloria07.toktive.api.objects.exceptions.ToktiveServiceParameterException;
-import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
 import twitter4j.TwitterException;
 
 public class FacebookPageShareStrategyTest {
@@ -34,8 +34,8 @@ public class FacebookPageShareStrategyTest {
 	
 	@Test
 	public void testShareWithValidParameter() {
-		SocialMessage validParam = new SocialMessage();
-		validParam.setMessage("");
+		ToktivePost validParam = new ToktivePost();
+		validParam.setPost("");
 		validParam.setSocialNetwork(SocialNetwork.FB_PAGES);
 		
 		assertNotNull(unit.share(validParam));

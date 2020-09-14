@@ -7,12 +7,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import io.github.jmgloria07.toktive.api.objects.SocialNetwork;
+import io.github.jmgloria07.toktive.api.objects.ToktivePost;
 import io.github.jmgloria07.toktive.api.objects.exceptions.ToktiveServiceParameterException;
-import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
 
-public class SocialMessageBuilderTest {
+public class ToktivePostBuilderTest {
 	
-	SocialMessageBuilder unit;
+	ToktivePostBuilder unit;
 	
 	private static final String MOCK_VALID_MESSAGE = "VALID MESSAGE";
 	
@@ -25,7 +25,7 @@ public class SocialMessageBuilderTest {
 	
 	@BeforeEach
 	public void init() {
-		unit = new SocialMessageBuilder();
+		unit = new ToktivePostBuilder();
 	}
 	
 	@AfterEach
@@ -36,15 +36,15 @@ public class SocialMessageBuilderTest {
 	//Test methods
 	@Test
 	public void testValidMessageParam() {
-		SocialMessage result = unit
+		ToktivePost result = unit
 				.withMessage(MOCK_VALID_MESSAGE)
 				.build();
-		assertEquals(MOCK_VALID_MESSAGE, result.getMessage());
+		assertEquals(MOCK_VALID_MESSAGE, result.getPost());
 	}
 	
 	@Test
 	public void testValidSocialNetworkParam() {
-		SocialMessage result = unit
+		ToktivePost result = unit
 				.withSocialNetwork(MOCK_VALID_SOCIAL_NETWORK_PARAM)
 				.build();
 		assertEquals(MOCK_VALID_SOCIAL_NETWORK_RESULT, result.getSocialNetwork());

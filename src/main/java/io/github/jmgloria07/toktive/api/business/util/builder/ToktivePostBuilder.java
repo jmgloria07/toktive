@@ -9,22 +9,22 @@ import org.springframework.stereotype.Component;
 
 import io.github.jmgloria07.toktive.api.business.util.LogUtil;
 import io.github.jmgloria07.toktive.api.objects.SocialNetwork;
+import io.github.jmgloria07.toktive.api.objects.ToktivePost;
 import io.github.jmgloria07.toktive.api.objects.exceptions.ToktiveServiceParameterException;
-import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
 
 /*
  * class to build the parameter object and validate the individual properties.
  */
 @Component
-public class SocialMessageBuilder {
+public class ToktivePostBuilder {
 	
-	private static final Logger LOG = LogManager.getLogger(SocialMessageBuilder.class);
+	private static final Logger LOG = LogManager.getLogger(ToktivePostBuilder.class);
 	
 	String message;
 	
 	SocialNetwork socialNetwork;
 	
-	public SocialMessageBuilder withSocialNetwork(String socialNetwork) {
+	public ToktivePostBuilder withSocialNetwork(String socialNetwork) {
 		this.socialNetwork = Arrays.asList(SocialNetwork.values()).stream()
 			.filter(enumValue -> enumValue.toString().equals(socialNetwork))
 			.findFirst()
@@ -36,7 +36,7 @@ public class SocialMessageBuilder {
 		return this;
 	}
 	
-	public SocialMessageBuilder withMessage(String message) {
+	public ToktivePostBuilder withMessage(String message) {
 		this.message = Optional.ofNullable(message)
 				.filter(str -> !str.isEmpty())
 				.orElseThrow(() -> {
@@ -47,10 +47,10 @@ public class SocialMessageBuilder {
 		return this;
 	}
 	
-	public SocialMessage build() {
-		SocialMessage socialMessage = new SocialMessage();
-		socialMessage.setMessage(message);
-		socialMessage.setSocialNetwork(socialNetwork);
-		return socialMessage;
+	public ToktivePost build() {
+		ToktivePost result = new ToktivePost();
+		result.setPost(message);
+		result.setSocialNetwork(socialNetwork);
+		return result;
 	}
 }

@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import io.github.jmgloria07.toktive.api.business.call.TwitterCall;
 import io.github.jmgloria07.toktive.api.objects.SocialNetwork;
+import io.github.jmgloria07.toktive.api.objects.ToktivePost;
 import io.github.jmgloria07.toktive.api.objects.exceptions.ToktiveServiceParameterException;
-import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
 import twitter4j.Status;
 import twitter4j.TwitterException;
 
@@ -33,8 +33,8 @@ public class TwitterShareStrategyTest {
 	
 	@Test
 	public void testShareWithValidParameter() {
-		SocialMessage validParam = new SocialMessage();
-		validParam.setMessage("");
+		ToktivePost validParam = new ToktivePost();
+		validParam.setPost("");
 		validParam.setSocialNetwork(SocialNetwork.TW);
 		
 		assertNotNull(unit.share(validParam));

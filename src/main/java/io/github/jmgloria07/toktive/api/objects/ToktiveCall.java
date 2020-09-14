@@ -1,6 +1,13 @@
 package io.github.jmgloria07.toktive.api.objects;
 
-public class CallStatus {
+import java.util.Optional;
+
+import io.github.jmgloria07.toktive.api.objects.exceptions.ToktiveServiceParameterException;
+
+/*
+ * Response object of each call to a specific third-party service
+ */
+public class ToktiveCall {
 	public enum Status {
 		SUCCESS,
 		FAIL,
@@ -13,11 +20,11 @@ public class CallStatus {
 	
 	private String errorMessage;
 
-	public CallStatus() {
+	public ToktiveCall() {
 		
 	}
 	
-	public CallStatus(Status status, String link, String errorMessage) {
+	public ToktiveCall(Status status, String link, String errorMessage) {
 		super();
 		this.status = status;
 		this.link = link;
@@ -49,11 +56,13 @@ public class CallStatus {
 	}
 	
 	public boolean isCallSuccessful() {
-		return getStatus() == Status.SUCCESS;
+		return Optional.ofNullable(getStatus())
+				.map(status -> status == Status.SUCCESS)
+				.orElseThrow(() -> new ToktiveServiceParameterException("status"));
 	}
 	
 	@Override
 	public String toString() {
-		return "CallStatus [status=" + status + ", link=" + link + ", errorMessage=" + errorMessage + "]";
+		return "ToktiveCall [status=" + status + ", link=" + link + ", errorMessage=" + errorMessage + "]";
 	}
 }

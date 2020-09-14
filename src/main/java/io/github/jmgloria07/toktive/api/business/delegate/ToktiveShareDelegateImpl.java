@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 
 import io.github.jmgloria07.toktive.api.business.share.ShareStrategy;
 import io.github.jmgloria07.toktive.api.business.share.ShareStrategyContext;
-import io.github.jmgloria07.toktive.api.objects.CallStatus;
+import io.github.jmgloria07.toktive.api.objects.ToktiveCall;
 import io.github.jmgloria07.toktive.api.objects.ToktiveError;
+import io.github.jmgloria07.toktive.api.objects.ToktivePost;
 import io.github.jmgloria07.toktive.api.objects.ToktiveResponse;
-import io.github.jmgloria07.toktive.api.objects.messages.SocialMessage;
 
 /*
  * Default implementation of the share delegate
@@ -25,10 +25,10 @@ public class ToktiveShareDelegateImpl implements ToktiveShareDelegate {
 	ShareStrategyContext shareStrategyContext;
 	
 	@Override
-	public List<ToktiveResponse> shareToAllNetworks(Set<SocialMessage> socialMessages) {
+	public List<ToktiveResponse> shareToAllNetworks(Set<ToktivePost> posts) {
 		
 		//do each strategy
-		Set<CallStatus> socialStatuses = socialMessages.stream()
+		Set<ToktiveCall> socialStatuses = posts.stream()
 			.map(socialMessage -> {
 				ShareStrategy strategy = shareStrategyContext.getStrategy(socialMessage.getSocialNetwork());
 				return strategy.share(socialMessage);
@@ -42,7 +42,7 @@ public class ToktiveShareDelegateImpl implements ToktiveShareDelegate {
 		return response;
 	}
 	
-	static ToktiveResponse buildResponse(CallStatus socialStatus) {
+	static ToktiveResponse buildResponse(ToktiveCall socialStatus) {
 		ToktiveResponse result = new ToktiveResponse(); 
 		result.setUrl(socialStatus.getLink());
 		result.setStatus(socialStatus.getStatus().toString());
